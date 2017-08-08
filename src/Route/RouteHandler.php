@@ -44,7 +44,25 @@ class RouteHandler implements RouteInterface
                 $response->getBody()->write("Hello, $name");
 
                 return $response;
-            });
+            })
+        ;
+
+        return $this;
+    }
+
+    private function loadStockRoute()
+    {
+        $this
+            ->app
+            ->get('/hello/{name}', function (Request $request, Response $response) {
+                $name = $request->getAttribute('name');
+                $response->getBody()->write("Hello, $name");
+
+                return $response;
+            })
+        ;
+
+        return $this;
     }
 
 }

@@ -14,5 +14,14 @@ class Config implements ConfigInterface
             $databaseArray[$key] = $value;
         }
         define('DATABASE', $databaseArray);
+
+        $urlPrefixConfig = json_decode(
+            file_get_contents(__DIR__.'/../../app/config/urlPrefix.json')
+        );
+        $urlPrefix = $urlPrefixConfig
+            ->url_prefix
+            ->base_url
+        ;
+        define('BASE_URL', $urlPrefix);
     }
 }
