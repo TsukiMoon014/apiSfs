@@ -27,6 +27,12 @@ class Autoloader
             case 'StockModel':
                 require_once __DIR__.'/../src/Stock/'.$className.'.php';
                 break;
+            case 'Connection':
+                require_once __DIR__.'/../core/Database/'.$className.'.php';
+                break;
+            case 'ConnectionException':
+                require_once __DIR__.'/../core/Exceptions/'.$className.'.php';
+                break;
         }
     }
 }
