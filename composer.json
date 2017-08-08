@@ -7,5 +7,8 @@
             "email": "j.andriatsima@protonmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/var-dumper": "^3.3",
+        "slim/slim": "^3.8"
+    }
 }

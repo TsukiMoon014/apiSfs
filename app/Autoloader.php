@@ -35,7 +35,16 @@ class Autoloader
                 require_once __DIR__.'/../core/Database/'.$className.'.php';
                 break;
             case 'ConnectionException':
+            case 'PackageException':
                 require_once __DIR__.'/../core/Exceptions/'.$className.'.php';
+                break;
+            case 'PackageInterface':
+            case 'PackageModel':
+                require_once __DIR__.'/../src/Package/'.$className.'.php';
+                break;
+            case 'EANInterface':
+            case 'EANHandler':
+                require_once __DIR__.'/../src/EAN/'.$className.'.php';
                 break;
         }
     }
