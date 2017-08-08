@@ -1,0 +1,11 @@
+{
+    "name": "z4cco/api-sfs",
+    "description": "API for Ship from Store",
+    "authors": [
+        {
+            "name": "z4cco",
+            "email": "j.andriatsima@protonmail.com"
+        }
+    ],
+    "require": {}
+}
