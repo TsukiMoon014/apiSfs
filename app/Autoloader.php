@@ -46,6 +46,10 @@ class Autoloader
             case 'EANHandler':
                 require_once __DIR__.'/../src/EAN/'.$className.'.php';
                 break;
+            case 'RouteInterface':
+            case 'RouteHandler':
+                require_once __DIR__.'/../src/Route/'.$className.'.php';
+                break;
         }
     }
 }
