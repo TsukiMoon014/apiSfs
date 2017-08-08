@@ -27,6 +27,10 @@ class Autoloader
             case 'StockModel':
                 require_once __DIR__.'/../src/Stock/'.$className.'.php';
                 break;
+            case 'GalleryInterface':
+            case 'GalleryModel':
+                require_once __DIR__.'/../src/Gallery/'.$className.'.php';
+                break;
             case 'Connection':
                 require_once __DIR__.'/../core/Database/'.$className.'.php';
                 break;
