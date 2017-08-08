@@ -2,6 +2,9 @@
 
 namespace apiSfs\src\route;
 
+use apiSfs\core\database\Connection;
+use apiSfs\src\ean\EANHandler;
+use apiSfs\src\stock\StockModel;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
@@ -18,7 +21,7 @@ class RouteHandler implements RouteInterface
     public function loadRoutes()
     {
         $this
-            ->loadDefaultRoute()
+            ->loadStockRoute()
         ;
 
         return $this;
@@ -35,28 +38,26 @@ class RouteHandler implements RouteInterface
         return $this;
     }
 
-    private function loadDefaultRoute()
-    {
-        $this
-            ->app
-            ->get('/hello/{name}', function (Request $request, Response $response) {
-                $name = $request->getAttribute('name');
-                $response->getBody()->write("Hello, $name");
-
-                return $response;
-            })
-        ;
-
-        return $this;
-    }
 
     private function loadStockRoute()
     {
         $this
             ->app
-            ->get('/hello/{name}', function (Request $request, Response $response) {
-                $name = $request->getAttribute('name');
-                $response->getBody()->write("Hello, $name");
+            ->get(BASE_URL.'galleryList/{eanString}/{ip}', function (Request $request, Response $response) {
+                $eanHandler = new EANHandler(Connection::getConnection());
+                $eanArray = $eanHandler->getEansFromString($request->getAttribute('eanString'));
+                $ip = $request->getAttribute('ip');
+                $stockModel = new StockModel(Connection::getConnection());
+
+                $resArray = array();
+                foreach ($eanArray as $ean) {
+                    array_push($resArray, $stockModel->getStockInfosByEan('A90', $ean));
+                }
+
+                $response
+                    ->getBody()
+                    ->write($ip)
+                ;
 
                 return $response;
             })
