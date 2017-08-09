@@ -5,8 +5,11 @@ namespace apiSfs;
 use apiSfs\app\Autoloader;
 use apiSfs\core\ConfigHandler\Config;
 use apiSfs\core\Database\Connection;
+use apiSfs\src\EAN\EANHandler;
+use apiSfs\src\EAN\EANModel;
 use apiSfs\src\Gallery\GalleryModel;
 use apiSfs\src\route\RouteHandler;
+use apiSfs\src\Stock\StockModel;
 
 require_once __DIR__.'/app/Autoloader.php';
 require 'vendor/autoload.php';
@@ -23,9 +26,7 @@ Config::loadConfig();
 //    ->runRouter()
 //;
 
-$galleryModel = new GalleryModel(Connection::getConnection());
+$stockModel = new StockModel(Connection::getConnection());
 
-//dump($galleryModel->getCloseGalleryList(48.7192, 2.4573));
-$galleryModel->getCloseGalleryList(48.7192, 2.4573);
-
-//dump($galleryModel->getGalleryList());
+dump($stockModel->isStockAvailable('A90', '3662657096200'));
+$stockModel->isStockAvailable('A90', '3662657096200');

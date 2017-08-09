@@ -3,6 +3,7 @@
 namespace apiSfs\src\Stock;
 
 use apiSfs\core\Database\AbstractConnection;
+use apiSfs\src\EAN\EANHandler;
 
 class StockModel extends AbstractConnection implements StockInterface
 {
@@ -127,5 +128,171 @@ class StockModel extends AbstractConnection implements StockInterface
             
             return $res;
         }
+    }
+
+    public function isStockAvailable($cegidID, $eanList)
+    {
+        $eanHandler = new EANHandler();
+        $eanInfos = $eanHandler->getEansFromString($eanList);
+
+        $stockAvailable = true;
+        $fullStockInfos = array();
+        foreach ($eanInfos as $ean => $qtyNeeded) {
+            $stockInfos = $this->getStockInfosByEan($cegidID, strval($ean));
+            dump($stockInfos);
+            if (false === $stockInfos) {
+                $stockAvailable = false;
+            } else {
+                switch ($stockInfos['typeProduit']) {
+                    case 'CLASSIC':
+                        switch ($stockInfos['classeRotation']) {
+                            case 'A':
+                                switch ($stockInfos['tailleEtablissement']) {
+                                    case '1':
+                                        if ($stockInfos['stock'] - 4 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    case '2':
+                                        if ($stockInfos['stock'] - 3 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    case '3':
+                                    case '4':
+                                        if ($stockInfos['stock'] - 2 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    default:
+                                        if ($stockInfos['stock'] < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                }
+                                break;
+                            case 'B':
+                                switch ($stockInfos['tailleEtablissement']) {
+                                    case '1':
+                                        if ($stockInfos['stock'] - 3 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    case '2':
+                                    case '3':
+                                    case '4':
+                                        if ($stockInfos['stock'] - 2 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    default:
+                                        if ($stockInfos['stock'] < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                }
+                                break;
+                            default:
+                                if ($stockInfos['stock'] < $qtyNeeded) {
+                                    $stockAvailable = false;
+                                }
+                                break;
+                        }
+                        break;
+                    case 'LARGE FORMAT':
+                        switch ($stockInfos['classeRotation']) {
+                            case 'A':
+                                switch ($stockInfos['tailleEtablissement']) {
+                                    case '1':
+                                        if ($stockInfos['stock'] - 2 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    case '2':
+                                    case '3':
+                                    case '4':
+                                        if ($stockInfos['stock'] - 1 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    default:
+                                        if ($stockInfos['stock'] < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                }
+                                break;
+                            case 'B':
+                                if ($stockInfos['stock'] - 1 < $qtyNeeded) {
+                                    $stockAvailable = false;
+                                }
+                                break;
+                            default:
+                                if ($stockInfos['stock'] < $qtyNeeded) {
+                                    $stockAvailable = false;
+                                }
+                                break;
+                        }
+                        break;
+                    case 'GIANT FORMAT':
+                        switch ($stockInfos['classeRotation']) {
+                            case 'A':
+                                switch ($stockInfos['tailleEtablissement']) {
+                                    case '1':
+                                        if ($stockInfos['stock'] - 2 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    case '2':
+                                    case '3':
+                                    case '4':
+                                        if ($stockInfos['stock'] - 1 < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                    default:
+                                        if ($stockInfos['stock'] < $qtyNeeded) {
+                                            $stockAvailable = false;
+                                        }
+                                        break;
+                                }
+                                break;
+                            default:
+                                if ($stockInfos['stock'] < $qtyNeeded) {
+                                    $stockAvailable = false;
+                                }
+                                break;
+                        }
+                        break;
+                    default:
+                        if ($stockInfos['stock'] < $qtyNeeded) {
+                            $stockAvailable = false;
+                        }
+                        break;
+                }
+            }
+            if (false === $stockAvailable) {
+                break;
+            } else {
+                array_push($fullStockInfos, $stockInfos);
+            }
+        }
+        if (true === $stockAvailable) {
+            $resArray = array(
+                'status' => 'SUCCESS',
+                'store' => $cegidID,
+                'eans' => $eanInfos,
+                'stockInfos' => $fullStockInfos
+            );
+        } else {
+            $resArray = array(
+                'status' => 'ERROR',
+                'message' => 'Stock unavailable',
+                'store' => $cegidID,
+                'eans' => $eanInfos,
+            );
+        }
+
+        return $resArray;
     }
 }

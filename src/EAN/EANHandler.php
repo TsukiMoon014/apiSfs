@@ -6,6 +6,8 @@ class EANHandler implements EANInterface
 {
     public function getEansFromString($eanList)
     {
-        return explode('-', $eanList);
+        $eanArray = explode('-', $eanList);
+
+        return array_count_values($eanArray);
     }
 }
