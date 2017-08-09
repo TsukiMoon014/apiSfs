@@ -1,8 +1,8 @@
 {
   "database": {
-    "host": "172.17.0.2",
-    "login": "z4cco",
-    "password": "password",
+    "host": "172.17.0.3",
+    "login": "root",
+    "password": "localpass",
     "database_name": "localYK"
   }
 }

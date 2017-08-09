@@ -34,8 +34,8 @@ class Autoloader
             case 'Connection':
                 require_once __DIR__.'/../core/Database/'.$className.'.php';
                 break;
-            case 'ConnectionException':
             case 'PackageException':
+            case 'IPException':
                 require_once __DIR__.'/../core/Exceptions/'.$className.'.php';
                 break;
             case 'PackageInterface':
@@ -44,11 +44,19 @@ class Autoloader
                 break;
             case 'EANInterface':
             case 'EANHandler':
+            case 'EANModel':
                 require_once __DIR__.'/../src/EAN/'.$className.'.php';
                 break;
             case 'RouteInterface':
             case 'RouteHandler':
                 require_once __DIR__.'/../src/Route/'.$className.'.php';
+                break;
+            case 'Utils':
+                require_once __DIR__.'/../src/Utils/'.$className.'.php';
+                break;
+            case 'MaxmindInterface':
+            case 'MaxmindHandler':
+                require_once __DIR__.'/../src/Maxmind/'.$className.'.php';
                 break;
         }
     }

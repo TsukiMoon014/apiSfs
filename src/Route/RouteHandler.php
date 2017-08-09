@@ -25,7 +25,15 @@ class RouteHandler implements RouteInterface
         ;
 
         return $this;
+    }
 
+    public function loadTestRoutes()
+    {
+        $this
+            ->loadTestStockRoute()
+        ;
+
+        return $this;
     }
 
     public function runRouter()
@@ -38,12 +46,11 @@ class RouteHandler implements RouteInterface
         return $this;
     }
 
-
     private function loadStockRoute()
     {
         $this
             ->app
-            ->get(BASE_URL.'galleryList/{eanString}/{ip}', function (Request $request, Response $response) {
+            ->get(BASE_URL.'/galleryList/{eanString}/{ip}', function (Request $request, Response $response) {
                 $eanHandler = new EANHandler(Connection::getConnection());
                 $eanArray = $eanHandler->getEansFromString($request->getAttribute('eanString'));
                 $ip = $request->getAttribute('ip');
@@ -57,6 +64,27 @@ class RouteHandler implements RouteInterface
                 $response
                     ->getBody()
                     ->write($ip)
+                ;
+
+                return $response;
+            })
+        ;
+
+        return $this;
+    }
+
+    private function loadTestStockRoute()
+    {
+        $this
+            ->app
+            ->get(BASE_URL.'/galleryList/{eanString}', function (Request $request, Response $response) {
+                $eanString = $request->getAttribute('eanString');
+//                $stockModel = new StockModel(Connection::getConnection());
+//                $stockInfos = $stockModel->getStockInfosByEan('A90', '3662657639902');
+
+                $response
+                    ->getBody()
+                    ->write($eanString)
                 ;
 
                 return $response;

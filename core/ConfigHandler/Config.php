@@ -23,5 +23,14 @@ class Config implements ConfigInterface
             ->base_url
         ;
         define('BASE_URL', $urlPrefix);
+
+        $perimeterConfig = json_decode(
+            file_get_contents(__DIR__.'/../../app/config/perimeter.json')
+        );
+        $perimeter = $perimeterConfig
+            ->perimeter
+            ->max_perimeter
+        ;
+        define('MAX_PERIMETER', $perimeter);
     }
 }

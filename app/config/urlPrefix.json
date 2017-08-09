@@ -1,5 +1,5 @@
 {
   "url_prefix": {
-    "base_url": "/api/sfs/"
+    "base_url": "/api/sfs"
   }
 }
