@@ -4,5 +4,5 @@ namespace apiSfs\src\EAN;
 
 interface EANInterface
 {
-    public function getEansFromString($eanList);
+    public static function getEansFromString($eanList);
 }
