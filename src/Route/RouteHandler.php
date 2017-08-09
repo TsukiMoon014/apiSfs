@@ -12,17 +12,34 @@ use apiSfs\src\EAN\EANModel;
 use apiSfs\src\Gallery\GalleryModel;
 use apiSfs\src\Maxmind\MaxmindHandler;
 use apiSfs\src\Stock\StockModel;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
+use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 class RouteHandler implements RouteInterface
 {
     private $app;
+    private $container;
 
     public function __construct()
     {
-        $this->app = new App();
+        $this->container = new Container();
+        $this->container['notFoundHandler'] = function ($c) {
+            return function (ServerRequestInterface $request, ResponseInterface $response) use ($c) {
+                $resArray = array(
+                    'status' => 'ERROR',
+                    'message' => 'Provided URL does not match any route'
+                );
+                return $this->container['response']
+                    ->withStatus(404)
+                    ->withHeader('Content-Type', 'application/json;charset=utf-8')
+                    ->write(json_encode($resArray));
+            };
+        };
+        $this->app = new App($this->container);
     }
 
     public function loadRoutes()
