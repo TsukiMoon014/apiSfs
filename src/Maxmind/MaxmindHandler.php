@@ -2,6 +2,7 @@
 
 namespace apiSfs\src\Maxmind;
 
+use apiSfs\core\Exceptions\MaxmindException;
 use apiSfs\src\Utils\Utils;
 
 class MaxmindHandler implements MaxmindInterface
@@ -15,17 +16,11 @@ class MaxmindHandler implements MaxmindInterface
             if (isset($res) && !empty($res)) {
                 return array(
                     'status' => 'SUCCESS',
-                    'lat' => $res->latitude,
-                    'lng' => $res->longitude,
-                    'postal_code' => $res->postal_code,
-                    'city' => $res->city,
-                    'country_code' => $res->country_code,
+                    'latitude' => $res->latitude,
+                    'longitude' => $res->longitude,
                 );
             } else {
-                return array(
-                    'status' => "ERROR",
-                    'result' => "Empty set"
-                );
+                throw new MaxmindException('Maxmind could not retrieve provided IP infos');
             }
         } else {
             return false;

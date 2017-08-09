@@ -2,14 +2,14 @@
 
 namespace apiSfs\core\Exceptions;
 
-class IPException extends \Exception
+class GalleryException extends \Exception
 {
     public function __construct($message = null)
     {
         if (null === $message) {
-            $message = 'Error using IP module';
+            $message = 'Error using gallery data';
         } else {
-            $message = 'Error using IP module: '.$message;
+            $message = 'Error using gallery data: '.$message;
         }
 
         parent::__construct($message);

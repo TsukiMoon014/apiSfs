@@ -3,6 +3,7 @@
 namespace apiSfs\src\EAN;
 
 use apiSfs\core\Database\AbstractConnection;
+use apiSfs\core\Exceptions\EANException;
 
 class EANModel extends AbstractConnection
 {
@@ -19,6 +20,11 @@ class EANModel extends AbstractConnection
             ');
 
         $req->execute(array($ean));
+
+        if ($req->rowCount() == 0) {
+            throw new EANException('invalid EAN, unable to get masterEan');
+        }
+        
         $res = $req->fetch();
         $masterEan = $res['ean'];
 

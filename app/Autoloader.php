@@ -39,6 +39,7 @@ class Autoloader
             case 'PackageException':
             case 'IPException':
             case 'EANException':
+            case 'MaxmindException':
                 require_once __DIR__.'/../core/Exceptions/'.$className.'.php';
                 break;
             case 'PackageInterface':

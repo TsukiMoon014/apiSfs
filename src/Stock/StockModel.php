@@ -276,21 +276,9 @@ class StockModel extends AbstractConnection implements StockInterface
             }
         }
         if (true === $stockAvailable) {
-            $resArray = array(
-                'status' => 'SUCCESS',
-                'store' => $cegidID,
-                'eans' => $eanInfos,
-                'stockInfos' => $fullStockInfos
-            );
+           return $fullStockInfos;
         } else {
-            $resArray = array(
-                'status' => 'ERROR',
-                'message' => 'Stock unavailable',
-                'store' => $cegidID,
-                'eans' => $eanInfos,
-            );
+            return false;
         }
-
-        return $resArray;
     }
 }

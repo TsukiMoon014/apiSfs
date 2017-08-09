@@ -3,6 +3,7 @@
 namespace apiSfs\src\Gallery;
 
 use apiSfs\core\Database\AbstractConnection;
+use apiSfs\core\Exceptions\GalleryException;
 use apiSfs\src\Utils\Utils;
 
 class GalleryModel extends AbstractConnection implements GalleryInterface
@@ -67,7 +68,11 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         ;
         $req->execute();
 
-        return $req->fetchAll();
+        if ($req->rowCount() == 0) {
+            throw new GalleryException('No results for getGalleryList() method');
+        } else {
+            return $req->fetchAll();
+        }
     }
 
     public function getCloseGalleryList($latitude, $longitude)
@@ -86,6 +91,10 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         }
         ksort($resArray);
 
-        return $resArray;
+        if (false !== empty($resArray)) {
+            throw new GalleryException('No results for getCloseGalleryList() method');
+        } else {
+            return array_keys($resArray);
+        }
     }
 }

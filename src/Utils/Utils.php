@@ -9,7 +9,7 @@ class Utils
     public static function isValidIpAddress($ip)
     {
         if (false === filter_var($ip, FILTER_VALIDATE_IP)) {
-            throw new IPException();
+            throw new IPException('Provided IP is not valid');
         } else {
             return true;
         }
