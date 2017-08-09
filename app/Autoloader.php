@@ -32,6 +32,8 @@ class Autoloader
                 require_once __DIR__.'/../src/Gallery/'.$className.'.php';
                 break;
             case 'Connection':
+            case 'ConnectionInterface':
+            case 'AbstractConnection':
                 require_once __DIR__.'/../core/Database/'.$className.'.php';
                 break;
             case 'PackageException':

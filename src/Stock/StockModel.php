@@ -1,8 +1,8 @@
 <?php
 
-namespace apiSfs\src\stock;
+namespace apiSfs\src\Stock;
 
-use apiSfs\core\database\AbstractConnection;
+use apiSfs\core\Database\AbstractConnection;
 
 class StockModel extends AbstractConnection implements StockInterface
 {

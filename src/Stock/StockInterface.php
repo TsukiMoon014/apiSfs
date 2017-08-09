@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\src\stock;
+namespace apiSfs\src\Stock;
 
 interface StockInterface
 {

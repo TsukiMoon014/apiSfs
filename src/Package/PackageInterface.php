@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\src\package;
+namespace apiSfs\src\Package;
 
 interface PackageInterface
 {

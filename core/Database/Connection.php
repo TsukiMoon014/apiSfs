@@ -1,7 +1,6 @@
 <?php
 
-namespace apiSfs\core\database;
-use apiSfs\core\exceptions\ConnectionException;
+namespace apiSfs\core\Database;
 
 /**
  * Class Connection
@@ -50,4 +49,19 @@ class Connection implements ConnectionInterface
             ->prepare($query)
         ;
     }
+
+    /**
+     * Implements PDO query() method
+     * @param $sql
+     * @return \PDOStatement
+     */
+    public function query($sql)
+    {
+        return $this
+            ->pdo
+            ->query($sql)
+        ;
+    }
+
+
 }

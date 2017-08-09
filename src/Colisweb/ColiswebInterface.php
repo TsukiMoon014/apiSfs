@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\src\colisweb;
+namespace apiSfs\src\Colisweb;
 
 interface ColiswebInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\src\ean;
+namespace apiSfs\src\EAN;
 
 interface EANInterface
 {

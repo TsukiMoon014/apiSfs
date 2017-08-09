@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\core\database;
+namespace apiSfs\core\Database;
 
 interface ConnectionInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\core\exceptions;
+namespace apiSfs\core\Exceptions;
 
 class PackageException extends \Exception
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace apiSfs\src\gallery;
+namespace apiSfs\src\Gallery;
 
 interface GalleryInterface
 {

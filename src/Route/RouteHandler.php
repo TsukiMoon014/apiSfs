@@ -1,13 +1,13 @@
 <?php
 
-namespace apiSfs\src\route;
+namespace apiSfs\src\Route;
 
-use apiSfs\core\database\Connection;
-use apiSfs\src\ean\EANHandler;
-use apiSfs\src\stock\StockModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use apiSfs\core\Database\Connection;
+use apiSfs\src\EAN\EANHandler;
+use apiSfs\src\Stock\StockModel;
 use Slim\App;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 class RouteHandler implements RouteInterface
 {
@@ -54,19 +54,8 @@ class RouteHandler implements RouteInterface
                 $eanHandler = new EANHandler(Connection::getConnection());
                 $eanArray = $eanHandler->getEansFromString($request->getAttribute('eanString'));
                 $ip = $request->getAttribute('ip');
-                $stockModel = new StockModel(Connection::getConnection());
-
-                $resArray = array();
-                foreach ($eanArray as $ean) {
-                    array_push($resArray, $stockModel->getStockInfosByEan('A90', $ean));
-                }
-
-                $response
-                    ->getBody()
-                    ->write($ip)
-                ;
-
-                return $response;
+                
+                
             })
         ;
 
@@ -77,16 +66,11 @@ class RouteHandler implements RouteInterface
     {
         $this
             ->app
-            ->get(BASE_URL.'/galleryList/{eanString}', function (Request $request, Response $response) {
-                $eanString = $request->getAttribute('eanString');
-//                $stockModel = new StockModel(Connection::getConnection());
-//                $stockInfos = $stockModel->getStockInfosByEan('A90', '3662657639902');
-
-                $response
-                    ->getBody()
-                    ->write($eanString)
-                ;
-
+            ->get(BASE_URL.'/test/stock', function (Request $request, Response $response) {
+                $stockModel = new StockModel(Connection::getConnection());
+                $stockInfos = $stockModel->getStockInfosByEan('A90', '3662657779813');
+                $response = $response->withJson($stockInfos);
+                
                 return $response;
             })
         ;

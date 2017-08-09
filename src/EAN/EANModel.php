@@ -2,7 +2,7 @@
 
 namespace apiSfs\src\EAN;
 
-use apiSfs\core\database\AbstractConnection;
+use apiSfs\core\Database\AbstractConnection;
 
 class EANModel extends AbstractConnection
 {

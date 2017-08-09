@@ -1,8 +1,8 @@
 <?php
 
-namespace apiSfs\src\package;
+namespace apiSfs\src\Package;
 
-use apiSfs\core\database\AbstractConnection;
+use apiSfs\core\Database\AbstractConnection;
 
 class PackageModel extends AbstractConnection implements PackageInterface
 {

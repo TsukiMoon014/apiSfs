@@ -1,8 +1,8 @@
 <?php
 
-namespace apiSfs\src\gallery;
+namespace apiSfs\src\Gallery;
 
-use apiSfs\core\database\AbstractConnection;
+use apiSfs\core\Database\AbstractConnection;
 
 class GalleryModel extends AbstractConnection implements GalleryInterface
 {
