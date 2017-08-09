@@ -132,7 +132,7 @@ class StockModel extends AbstractConnection implements StockInterface
 
     public function isStockAvailable($cegidID, $eanList)
     {
-        $eanInfos = EANHandler::getEansFromString($eanList);
+        $eanInfos = EANHandler::getEansInfosFromEanString($eanList);
 
         $stockAvailable = true;
         $fullStockInfos = array();
