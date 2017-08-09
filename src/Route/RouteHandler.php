@@ -4,6 +4,7 @@ namespace apiSfs\src\Route;
 
 use apiSfs\core\Database\Connection;
 use apiSfs\src\EAN\EANHandler;
+use apiSfs\src\Gallery\GalleryModel;
 use apiSfs\src\Stock\StockModel;
 use Slim\App;
 use Slim\Http\Request;
@@ -31,6 +32,7 @@ class RouteHandler implements RouteInterface
     {
         $this
             ->loadTestStockRoute()
+            ->loadTestSandbox()
         ;
 
         return $this;
@@ -76,6 +78,24 @@ class RouteHandler implements RouteInterface
         ;
 
         return $this;
+    }
+
+    private function loadTestSandbox()
+    {
+        $this
+            ->app
+            ->get(BASE_URL.'/test', function (Request $request, Response $response) {
+                $galleryModel = new GalleryModel(Connection::getConnection());
+
+                $response = $response
+                    ->withJson($galleryModel->getCloseGalleryList(48.7192, 2.4573))
+                ;
+                
+                return $response;
+
+            })
+        ;
+
     }
 
 }

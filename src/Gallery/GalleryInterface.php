@@ -8,5 +8,5 @@ interface GalleryInterface
 
     public function getGalleryList($type);
 
-    public function getCloseGalleryList();
+    public function getCloseGalleryList($latitude, $longitude);
 }

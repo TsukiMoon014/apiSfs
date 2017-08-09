@@ -19,6 +19,7 @@ class Connection implements ConnectionInterface
     {
         try {
             $this->pdo = new \PDO("mysql:host=".DATABASE['host'].";dbname=".DATABASE['database_name'].";charset=utf8", DATABASE['login'], DATABASE['password']);
+            $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } catch (\PDOException $exception) {
             echo 'Failed to connect to database: '.$exception->getMessage();
         }
