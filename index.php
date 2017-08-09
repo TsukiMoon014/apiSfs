@@ -4,7 +4,7 @@ namespace apiSfs;
 
 use apiSfs\app\Autoloader;
 use apiSfs\core\ConfigHandler\Config;
-use apiSfs\src\route\RouteHandler;
+use apiSfs\src\Route\RouteHandler;
 
 require_once __DIR__.'/app/Autoloader.php';
 require_once 'vendor/autoload.php';

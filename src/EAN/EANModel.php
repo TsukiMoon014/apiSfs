@@ -5,8 +5,21 @@ namespace apiSfs\src\EAN;
 use apiSfs\core\Database\AbstractConnection;
 use apiSfs\core\Exceptions\EANException;
 
+/**
+ * Class EANModel
+ *
+ * Provides EANs related database interactions logic
+ *
+ * @package apiSfs\src\EAN
+ */
 class EANModel extends AbstractConnection
 {
+    /**
+     * Fetches master EAN for provided EAN
+     * @param $ean
+     * @return string
+     * @throws EANException
+     */
     public function getMasterEan($ean)
     {
         $req = $this

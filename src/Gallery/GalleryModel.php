@@ -6,8 +6,20 @@ use apiSfs\core\Database\AbstractConnection;
 use apiSfs\core\Exceptions\GalleryException;
 use apiSfs\src\Utils\Utils;
 
+/**
+ * Class GalleryModel
+ *
+ * Provides Gallery module database interactions logic
+ *
+ * @package apiSfs\src\Gallery
+ */
 class GalleryModel extends AbstractConnection implements GalleryInterface
 {
+    /**
+     * Checks if provided cegid ID exists
+     * @param $cegidID
+     * @return bool
+     */
     public function isValidCegidId($cegidID)
     {
         $req = $this
@@ -23,6 +35,11 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         return $req->rowCount() > 0 ? true : false;
     }
 
+    /**
+     * Returns all galeries
+     * @param $type
+     * @return array
+     */
     public function getGalleryList($type = null)
     {
         $galleryList = array();
@@ -75,6 +92,12 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         }
     }
 
+    /**
+     * Return all galeries near to provided coordinates
+     * @param $latitude
+     * @param $longitude
+     * @return array
+     */
     public function getCloseGalleryList($latitude, $longitude)
     {
         $galleryList = $this->getGalleryList();

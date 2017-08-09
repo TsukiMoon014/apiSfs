@@ -44,6 +44,7 @@ class EANHandler implements EANInterface
     }
 
     /**
+     * Transforms an array representing an EAN list into array representing each EAN quantity
      * @param $eanArray
      * @return array
      * @throws EANException
@@ -58,6 +59,7 @@ class EANHandler implements EANInterface
     }
 
     /**
+     * Transforms an EAN list separated by dashes (-) into array representing each EAN quantity
      * @param $eanString
      * @return array
      * @throws EANException
