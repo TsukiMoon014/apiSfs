@@ -4,7 +4,9 @@ namespace apiSfs\core\Database;
 
 /**
  * Class Connection
- * Provides database connection
+ *
+ * Provides database connection logic
+ * 
  * @package apiSfs\core\Database
  */
 class Connection implements ConnectionInterface
@@ -27,7 +29,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Return connnection instance
+     * Returns connnection instance usings singleton design pattern
      * @return bool|Connection|null
      */
     public static function getConnection()
@@ -63,6 +65,4 @@ class Connection implements ConnectionInterface
             ->query($sql)
         ;
     }
-
-
 }

@@ -2,6 +2,13 @@
 
 namespace apiSfs\core\Exceptions;
 
+/**
+ * Class PackageException
+ *
+ * Exception handling for Package module
+ *
+ * @package apiSfs\core\Exceptions
+ */
 class PackageException extends \Exception
 {
     public function __construct($message = null)

@@ -2,6 +2,13 @@
 
 namespace apiSfs\core\Exceptions;
 
+/**
+ * Class MaxmindException
+ *
+ * Exception handling for Maxmind module
+ *
+ * @package apiSfs\core\Exceptions
+ */
 class MaxmindException extends \Exception
 {
     public function __construct($message = null)

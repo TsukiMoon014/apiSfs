@@ -2,6 +2,13 @@
 
 namespace apiSfs\core\Exceptions;
 
+/**
+ * Class EANException
+ *
+ * Exception handling for EAN module
+ *
+ * @package apiSfs\core\Exceptions
+ */
 class EANException extends \Exception
 {
     public function __construct($message = null)

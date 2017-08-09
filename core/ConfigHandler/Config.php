@@ -2,6 +2,13 @@
 
 namespace apiSfs\core\ConfigHandler;
 
+/**
+ * Class Config
+ *
+ * Provides JSON configuration files loading logic
+ *
+ * @package apiSfs\core\ConfigHandler
+ */
 class Config implements ConfigInterface
 {
     public static function loadConfig()
