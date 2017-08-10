@@ -13,6 +13,11 @@ class Config implements ConfigInterface
 {
     public static function loadConfig()
     {
+        $apiConfig = json_decode(
+            file_get_contents(__DIR__.'/../../app/config/api.json')
+        );
+        define('PRODUCTION_ENVIRONMENT', $apiConfig->api->production_environment);
+        
         $databaseConfig = json_decode(
             file_get_contents(__DIR__.'/../../app/config/database.json')
         );

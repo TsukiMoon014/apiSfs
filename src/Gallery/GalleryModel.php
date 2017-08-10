@@ -93,7 +93,7 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
     }
 
     /**
-     * Return all galeries near to provided coordinates
+     * Returns all galeries near to provided coordinates
      * @param $latitude
      * @param $longitude
      * @return array
@@ -118,6 +118,31 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
             throw new GalleryException('No results for getCloseGalleryList() method');
         } else {
             return array_keys($resArray);
+        }
+    }
+
+    /*
+     * Returns provided cegidID relative store code
+     * @param $cegidID
+     * @return string
+     */
+    public function getStoreCode($cegidID)
+    {
+        $req = $this
+            ->connection
+            ->prepare('
+              SELECT etablissement_id as storecode
+              FROM final_etablissement
+              WHERE cegid_id = ?
+            '
+        );
+        $params = array($cegidID);
+        $req->execute($params);
+
+        if ($req->rowCount() == 0) {
+            throw new GalleryException('Store code not found');
+        } else {
+            return $req->fetch(\PDO::FETCH_COLUMN);
         }
     }
 }

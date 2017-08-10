@@ -11,5 +11,8 @@ namespace apiSfs\src\Colisweb;
  */
 interface ColiswebInterface
 {
-    
+    /*
+     * Gets available Colisweb timing
+     */
+    public function getCarrierTiming($cegidID, $postalCode, $packageList);
 }

@@ -3,6 +3,7 @@
 namespace apiSfs\src\Package;
 
 use apiSfs\core\Database\AbstractConnection;
+use apiSfs\core\Exceptions\PackageException;
 
 class PackageModel extends AbstractConnection implements PackageInterface
 {
@@ -22,9 +23,12 @@ class PackageModel extends AbstractConnection implements PackageInterface
               WHERE FP.ean = ?
              ')
         ;
-
         $req->execute(array($ean));
 
-        return $req->fetch();
+        if ($req->rowCount() == 0) {
+            throw new PackageException('Unable to retrieve provided EAN\'s dimensions');
+        } else {
+            return $req->fetch();
+        }
     }
 }

@@ -40,6 +40,8 @@ class Autoloader
             case 'IPException':
             case 'EANException':
             case 'MaxmindException':
+            case 'ColiswebException':
+            case 'GalleryException':
                 require_once __DIR__.'/../core/Exceptions/'.$className.'.php';
                 break;
             case 'PackageInterface':
@@ -61,6 +63,10 @@ class Autoloader
             case 'MaxmindInterface':
             case 'MaxmindHandler':
                 require_once __DIR__.'/../src/Maxmind/'.$className.'.php';
+                break;
+            case 'ColiswebHandler':
+            case 'ColiswebInterface':
+                require_once __DIR__.'/../src/Colisweb/'.$className.'.php';
                 break;
         }
     }

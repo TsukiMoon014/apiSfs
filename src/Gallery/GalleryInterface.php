@@ -26,10 +26,16 @@ interface GalleryInterface
     public function getGalleryList($type);
 
     /**
-     * Return all galeries near to provided coordinates
+     * Returns all galeries near to provided coordinates
      * @param $latitude
      * @param $longitude
      * @return array
      */
     public function getCloseGalleryList($latitude, $longitude);
+
+    /*
+     * Returns provided cegidID relative store code
+     * @param $cegidID
+     */
+    public function getStoreCode($cegidID);
 }
