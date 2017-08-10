@@ -39,5 +39,16 @@ class Config implements ConfigInterface
             ->max_perimeter
         ;
         define('MAX_PERIMETER', $perimeter);
+
+        $coliswebConfig = json_decode(
+            file_get_contents(__DIR__.'/../../app/config/colisweb.json')
+        );
+        $coliswebArray = array();
+        foreach ($coliswebConfig->colisweb as $environment => $config) {
+            foreach ($config as $key => $value) {
+                $coliswebArray[$environment][$key] = $value;
+            }
+        }
+        define('COLISWEB', $coliswebArray);
     }
 }

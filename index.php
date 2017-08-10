@@ -15,8 +15,10 @@ require_once 'resources/Maxmind/geoipregionvars.php';
 Autoloader::register();
 Config::loadConfig();
 
-$routeHandler = new RouteHandler();
-$routeHandler
-    ->loadRoutes()
-    ->runRouter()
-;
+//$routeHandler = new RouteHandler();
+//$routeHandler
+//    ->loadRoutes()
+//    ->runRouter()
+//;
+
+dump(COLISWEB);

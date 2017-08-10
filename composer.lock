@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0094c3ddd830ff93175643db8b282098",
+    "content-hash": "eb76520850f3f4b7b7aba5a841938c8b",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -36,6 +36,61 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "curl/curl",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-mod/curl.git",
+                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/19d39f6c101bf9ed76feea86b446361f53c8d368",
+                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Curl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hassan Amouhzi",
+                    "email": "hassan@anezi.net",
+                    "homepage": "http://hassan.amouhzi.com"
+                },
+                {
+                    "name": "php-curl-class",
+                    "homepage": "https://github.com/php-curl-class"
+                },
+                {
+                    "name": "user52",
+                    "homepage": "https://github.com/user52"
+                }
+            ],
+            "description": "cURL class for PHP",
+            "homepage": "https://github.com/php-mod/curl",
+            "keywords": [
+                "curl",
+                "dot"
+            ],
+            "time": "2017-08-09T09:46:25+00:00"
         },
         {
             "name": "nikic/fast-route",

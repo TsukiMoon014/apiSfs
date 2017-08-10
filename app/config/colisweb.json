@@ -1,0 +1,12 @@
+{
+  "colisweb": {
+    "production": {
+      "base_url": "https://api.colisweb.com",
+      "api_key": "1043549fea80c5bfdc018c72b2578010"
+    },
+    "development": {
+      "base_url": "https://sandbox.api.colisweb.com",
+      "api_key": "77e5948df73c28a410b2b6d2eae3da5d"
+    }
+  }
+}
