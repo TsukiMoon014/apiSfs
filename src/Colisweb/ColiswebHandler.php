@@ -90,7 +90,7 @@ class ColiswebHandler implements ColiswebInterface
         }
 
         if ($curl->error) {
-            throw new ColiswebException('Colisweb error: '.$curl->error_code);
+            throw new ColiswebException('Colisweb error: '.$curl->error_code.' - '.$curl->error_message);
         }
         else {
             return $curl->response;

@@ -3,10 +3,12 @@
 namespace apiSfs\src\Route;
 
 use apiSfs\core\Database\Connection;
+use apiSfs\core\Exceptions\ColiswebException;
 use apiSfs\core\Exceptions\EANException;
 use apiSfs\core\Exceptions\GalleryException;
 use apiSfs\core\Exceptions\IPException;
 use apiSfs\core\Exceptions\MaxmindException;
+use apiSfs\src\Colisweb\ColiswebHandler;
 use apiSfs\src\EAN\EANHandler;
 use apiSfs\src\EAN\EANModel;
 use apiSfs\src\Gallery\GalleryModel;
@@ -46,6 +48,7 @@ class RouteHandler implements RouteInterface
     {
         $this
             ->loadStockRoute()
+            ->loadCarrierTimingRoute()
         ;
 
         return $this;
@@ -149,13 +152,47 @@ class RouteHandler implements RouteInterface
                         'perimeter' => MAX_PERIMETER
                     );
                 }
-                
-                $response = $response->withJson($res);
+
+                $response = $response
+                    ->withStatus(200)
+                    ->withJson($res)
+                ;
 
                 return $response;
             })
         ;
 
         return $this;
+    }
+
+    private function loadCarrierTimingRoute()
+    {
+        $this
+            ->app
+            ->get(BASE_URL.'/carrier/timing/{cegidID}/{postalCode}/{eanString}', function (Request $request, Response $response) {
+                $cegidID = $request->getAttribute('cegidID');
+                $postalCode = $request->getAttribute('postalCode');
+                $eanString = $request->getAttribute('eanString');
+
+                $coliswebHandler = new ColiswebHandler(Connection::getConnection());
+                try {
+                    $res = $coliswebHandler->getCarrierTiming($cegidID, $postalCode, $eanString);
+                } catch (ColiswebException $exception) {
+                    $response = $response
+                        ->withStatus(500)
+                        ->withJson(array("ERROR", $exception->getMessage()))
+                    ;
+
+                    return $response;
+                }
+
+                $response = $response
+                    ->withStatus(200)
+                    ->withJson($res)
+                ;
+
+                return $response;
+            })
+        ;
     }
 }
