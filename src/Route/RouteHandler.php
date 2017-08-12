@@ -53,10 +53,7 @@ class RouteHandler implements RouteInterface
 
     public function runRouter()
     {
-        $this
-            ->app
-            ->run()
-        ;
+        $this->app->run();
 
         return $this;
     }
@@ -75,9 +72,10 @@ class RouteHandler implements RouteInterface
                 try {
                     $eanArray = EANHandler::getEansFromString($eanString);
                 } catch (EANException $exception) {
-                    $response = $response->withJson(
-                        array("ERROR", $exception->getMessage())
-                    );
+                    $response = $response
+                        ->withStatus(500)
+                        ->withJson(array("ERROR", $exception->getMessage()))
+                    ;
 
                     return $response;
                 }
@@ -86,9 +84,10 @@ class RouteHandler implements RouteInterface
                     try {
                         array_push($masterEans, $eanModel->getMasterEan($ean));
                     } catch (EANException $exception) {
-                        $response = $response->withJson(
-                            array("ERROR", $exception->getMessage())
-                        );
+                        $response = $response
+                            ->withStatus(500)
+                            ->withJson(array("ERROR", $exception->getMessage()))
+                        ;
 
                         return $response;
                     }
@@ -98,15 +97,17 @@ class RouteHandler implements RouteInterface
                 try {
                     $ipInfos = $maxmindHandler->getIpInfos($ip);
                 } catch (IPException $exception) {
-                    $response = $response->withJson(
-                        array("ERROR", $exception->getMessage())
-                    );
+                    $response = $response
+                        ->withStatus(500)
+                        ->withJson(array("ERROR", $exception->getMessage()))
+                    ;
 
                     return $response;
                 } catch (MaxmindException $exception) {
-                    $response = $response->withJson(
-                        array("ERROR", $exception->getMessage())
-                    );
+                    $response = $response
+                        ->withStatus(500)
+                        ->withJson(array("ERROR", $exception->getMessage()))
+                    ;
 
                     return $response;
                 }
@@ -115,9 +116,10 @@ class RouteHandler implements RouteInterface
                 try {
                     $closeGaleries = $galleryModel->getCloseGalleryList($ipInfos['latitude'], $ipInfos['longitude']);
                 } catch (GalleryException $exception) {
-                    $response = $response->withJson(
-                        array("ERROR", $exception->getMessage())
-                    );
+                    $response = $response
+                        ->withStatus(500)
+                        ->withJson(array("ERROR", $exception->getMessage()))
+                    ;
 
                     return $response;
                 }
