@@ -29,7 +29,7 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * Returns connnection instance usings singleton design pattern
+     * Returns connnection instance using singleton design pattern
      * @return bool|Connection|null
      */
     public static function getConnection()
