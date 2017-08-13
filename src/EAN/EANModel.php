@@ -25,7 +25,7 @@ class EANModel extends AbstractConnection
         $req = $this
             ->connection
             ->prepare('
-                SELECT 
+                SELECT
                   FP.family_id,
                   FP.ean
                 FROM final_product FP
@@ -37,7 +37,7 @@ class EANModel extends AbstractConnection
         if ($req->rowCount() == 0) {
             throw new EANException('invalid EAN, unable to get masterEan');
         }
-        
+
         $res = $req->fetch();
         $masterEan = $res['ean'];
 
@@ -45,7 +45,7 @@ class EANModel extends AbstractConnection
             $req = $this
                 ->connection
                 ->prepare('
-                SELECT 
+                SELECT
                   FP.finishing_id,
                   FP.mounting_id,
                   FP.mounting_color_id,

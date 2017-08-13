@@ -13,47 +13,25 @@ class Config implements ConfigInterface
 {
     public static function loadConfig()
     {
-        $apiConfig = json_decode(
-            file_get_contents(__DIR__.'/../../app/config/api.json')
-        );
-        define('PRODUCTION_ENVIRONMENT', $apiConfig->api->production_environment);
-        
-        $databaseConfig = json_decode(
-            file_get_contents(__DIR__.'/../../app/config/database.json')
-        );
-        $databaseArray = array();
-        foreach ($databaseConfig->database as $key => $value) {
-            $databaseArray[$key] = $value;
-        }
-        define('DATABASE', $databaseArray);
+        $configDirectory = scandir(__DIR__.'/../../app/config/');
 
-        $urlPrefixConfig = json_decode(
-            file_get_contents(__DIR__.'/../../app/config/urlPrefix.json')
-        );
-        $urlPrefix = $urlPrefixConfig
-            ->url_prefix
-            ->base_url
-        ;
-        define('BASE_URL', $urlPrefix);
+        foreach ($configDirectory as $configFile) {
+            if(!is_file(__DIR__.'/../../app/config/'.$configFile)) continue;
 
-        $perimeterConfig = json_decode(
-            file_get_contents(__DIR__.'/../../app/config/perimeter.json')
-        );
-        $perimeter = $perimeterConfig
-            ->perimeter
-            ->max_perimeter
-        ;
-        define('MAX_PERIMETER', $perimeter);
+            $config = json_decode(
+                file_get_contents(__DIR__.'/../../app/config/'.$configFile),true
+            );
 
-        $coliswebConfig = json_decode(
-            file_get_contents(__DIR__.'/../../app/config/colisweb.json')
-        );
-        $coliswebArray = array();
-        foreach ($coliswebConfig->colisweb as $environment => $config) {
-            foreach ($config as $key => $value) {
-                $coliswebArray[$environment][$key] = $value;
+            $configName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', basename($configFile,'.json')));
+
+            foreach ($config[$configName] as $mainKey => $mainValue) {
+                if(!is_array($mainValue)) define(strtoupper($configName.'_'.$mainKey),$mainValue);
+                else{
+                    foreach ($mainValue as $key => $value) {
+                        define(strtoupper($configName.'_'.$mainKey.'_'.$key),$value);
+                    }
+                }
             }
         }
-        define('COLISWEB', $coliswebArray);
     }
 }

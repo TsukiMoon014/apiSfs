@@ -18,7 +18,7 @@ class PackageException extends \Exception
         } else {
             $message = 'Error processing package handling: '.$message;
         }
-        
+
         parent::__construct($message);
     }
 }

@@ -39,16 +39,16 @@
         },
         {
             "name": "curl/curl",
-            "version": "1.7.1",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368"
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/19d39f6c101bf9ed76feea86b446361f53c8d368",
-                "reference": "19d39f6c101bf9ed76feea86b446361f53c8d368",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/16e8489b048ef57ffbf74591a201f7808155b2db",
+                "reference": "16e8489b048ef57ffbf74591a201f7808155b2db",
                 "shasum": ""
             },
             "require": {
@@ -90,7 +90,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2017-08-09T09:46:25+00:00"
+            "time": "2017-08-12T11:44:08+00:00"
         },
         {
             "name": "nikic/fast-route",

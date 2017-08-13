@@ -46,7 +46,7 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         switch ($type) {
             case 'sfs':
                 $sql = '
-                  SELECT 
+                  SELECT
                     cegid_id AS cegidID,
                     name,
                     latitude,
@@ -57,7 +57,7 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
                 break;
             case 'clickAndCollectJ+O':
                 $sql = '
-                  SELECT 
+                  SELECT
                     cegid_id AS cegidID,
                     name,
                     latitude,
@@ -68,7 +68,7 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
                 break;
             default:
                 $sql = '
-                  SELECT 
+                  SELECT
                     cegid_id AS cegidID,
                     name,
                     latitude,
@@ -105,7 +105,7 @@ class GalleryModel extends AbstractConnection implements GalleryInterface
         $resArray = array();
         foreach ($galleryList as $gallery) {
             $distance = Utils::getDistance($latitude, $longitude, $gallery['latitude'], $gallery['longitude']);
-            if ($distance < MAX_PERIMETER) {
+            if ($distance < PERIMETER_MAX_PERIMETER) {
                 $g = array();
                 $g['distance'] = $distance;
                 $g[$gallery['cegidID']] = $gallery;

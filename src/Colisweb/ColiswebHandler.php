@@ -77,16 +77,16 @@ class ColiswebHandler implements ColiswebInterface
         $postFields = json_encode($postFields);
 
         $curl = new Curl();
-        if (true === PRODUCTION_ENVIRONMENT) {
+        if (true === API_PRODUCTION_ENVIRONMENT) {
             $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-            $curl->setHeader('api-key', COLISWEB['production']['api_key']);
+            $curl->setHeader('api-key', COLISWEB_PRODUCTION_API_KEY);
             $curl->setHeader('content-type', 'application/json');
-            $curl->post(COLISWEB['production']['base_url'].'/4/deliveries/options', $postFields);
+            $curl->post(COLISWEB_PRODUCTION_BASE_URL.'/4/deliveries/options', $postFields);
         } else {
             $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-            $curl->setHeader('api-key', COLISWEB['development']['api_key']);
+            $curl->setHeader('api-key', COLISWEB_DEVELOPMENT_API_KEY);
             $curl->setHeader('content-type', 'application/json');
-            $curl->post(COLISWEB['development']['base_url'].'/4/deliveries/options', $postFields);
+            $curl->post(COLISWEB_DEVELOPMENT_BASE_URL.'/4/deliveries/options', $postFields);
         }
 
         if ($curl->error) {

@@ -6,7 +6,7 @@ namespace apiSfs\core\Database;
  * Class AbstractConnection
  *
  * Provides a constructor for models
- * 
+ *
  * @package apiSfs\core\Database
  */
 abstract class AbstractConnection

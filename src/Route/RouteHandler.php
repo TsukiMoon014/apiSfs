@@ -65,7 +65,7 @@ class RouteHandler implements RouteInterface
     {
         $this
             ->app
-            ->get(BASE_URL.'/galleryList/{eanString}/{ip}', function (Request $request, Response $response) {
+            ->get(URL_PREFIX_BASE_URL.'/galleryList/{eanString}/{ip}', function (Request $request, Response $response) {
                 $eanString = $request->getAttribute('eanString');
                 $ip = $request->getAttribute('ip');
 
@@ -149,7 +149,7 @@ class RouteHandler implements RouteInterface
                             'latitude' => $ipInfos['latitude'],
                             'longitude' => $ipInfos['longitude']
                         ),
-                        'perimeter' => MAX_PERIMETER
+                        'perimeter' => PERIMETER_MAX_PERIMETER
                     );
                 }
 
@@ -169,7 +169,7 @@ class RouteHandler implements RouteInterface
     {
         $this
             ->app
-            ->get(BASE_URL.'/carrier/timing/{cegidID}/{postalCode}/{eanString}', function (Request $request, Response $response) {
+            ->get(URL_PREFIX_BASE_URL.'/carrier/timing/{cegidID}/{postalCode}/{eanString}', function (Request $request, Response $response) {
                 $cegidID = $request->getAttribute('cegidID');
                 $postalCode = $request->getAttribute('postalCode');
                 $eanString = $request->getAttribute('eanString');

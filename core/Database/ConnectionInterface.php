@@ -6,7 +6,7 @@ namespace apiSfs\core\Database;
  * Interface ConnectionInterface
  *
  * Provides database connection logic
- * 
+ *
  * @package apiSfs\core\Database
  */
 interface ConnectionInterface

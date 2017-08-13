@@ -6,7 +6,7 @@ namespace apiSfs\core\Database;
  * Class Connection
  *
  * Provides database connection logic
- * 
+ *
  * @package apiSfs\core\Database
  */
 class Connection implements ConnectionInterface
@@ -20,7 +20,7 @@ class Connection implements ConnectionInterface
     private function __construct()
     {
         try {
-            $this->pdo = new \PDO("mysql:host=".DATABASE['host'].";dbname=".DATABASE['database_name'].";charset=utf8", DATABASE['login'], DATABASE['password']);
+            $this->pdo = new \PDO("mysql:host=".DATABASE_HOST.";dbname=".DATABASE_DATABASE_NAME.";charset=utf8", DATABASE_LOGIN, DATABASE_PASSWORD);
             $this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } catch (\PDOException $exception) {
             echo 'Failed to connect to database: '.$exception->getMessage();
