@@ -16,19 +16,35 @@ class Config implements ConfigInterface
         $configDirectory = scandir(__DIR__.'/../../app/config/');
 
         foreach ($configDirectory as $configFile) {
-            if(!is_file(__DIR__.'/../../app/config/'.$configFile)) continue;
+            if (false === is_file(__DIR__.'/../../app/config/'.$configFile)) {
+                continue;
+            }
 
             $config = json_decode(
-                file_get_contents(__DIR__.'/../../app/config/'.$configFile),true
+                file_get_contents(__DIR__.'/../../app/config/'.$configFile),
+                true
             );
 
-            $configName = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', basename($configFile,'.json')));
+            $configName = strtolower(
+                preg_replace(
+                    '/([a-z])([A-Z])/',
+                    '$1_$2',
+                    basename($configFile, '.json')
+                )
+            );
 
             foreach ($config[$configName] as $mainKey => $mainValue) {
-                if(!is_array($mainValue)) define(strtoupper($configName.'_'.$mainKey),$mainValue);
-                else{
+                if (false === is_array($mainValue)) {
+                    define(
+                        strtoupper($configName.'_'.$mainKey),
+                        $mainValue
+                    );
+                } else {
                     foreach ($mainValue as $key => $value) {
-                        define(strtoupper($configName.'_'.$mainKey.'_'.$key),$value);
+                        define(
+                            strtoupper($configName.'_'.$mainKey.'_'.$key),
+                            $value
+                        );
                     }
                 }
             }
